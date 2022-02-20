@@ -1,4 +1,4 @@
-import { DEX } from "./config/dexs.js";
+import { DEX } from "./config/dex.js";
 import { ENV } from "../example/env.js";
 import batchRequest from "batch-request-js";
 

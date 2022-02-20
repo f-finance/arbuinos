@@ -1,4 +1,4 @@
-import { DEX } from "../config/dexs.js";
+import { DEX } from "../config/dex.js";
 import { TOKEN_TYPE } from "../config/tokens.js";
 import { assetToSlug } from "../helpers.js";
 

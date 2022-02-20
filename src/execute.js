@@ -1,5 +1,5 @@
 import { getAmountOut } from "./calculations.js";
-import { DEX } from "./config/dexs.js";
+import { DEX } from "./config/dex.js";
 import { slugToAsset } from "./helpers.js";
 import { TOKEN_TYPE } from "./config/tokens.js";
 

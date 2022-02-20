@@ -1,8 +1,10 @@
+import { assetToSlug } from "../helpers.js";
+
 export const TOKEN_TYPE = {
   XTZ: "XTZ",
   FA12: "FA12",
-  FA2: "FA2",
-}
+  FA2: "FA2"
+};
 
 export const TOKENS = [
   {
@@ -13,7 +15,7 @@ export const TOKENS = [
     "symbol": "XTZ",
     "name": "Tezos",
     "imgUrl": "",
-    "exchange": "",
+    "exchange": ""
   },
   {
     "type": "token",
@@ -653,3 +655,12 @@ export const TOKENS = [
     "exchange": ""
   }
 ];
+
+export const SLUG_TO_TOKEN = Object.fromEntries(TOKENS.map(token => [
+  assetToSlug({
+    type: token.type,
+    address: token.id,
+    ...(token.type === TOKEN_TYPE.FA2 ? { tokenId: token.fa2TokenId } : {})
+  }),
+  token
+]));
