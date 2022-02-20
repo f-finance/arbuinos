@@ -9,7 +9,7 @@ export const TOKEN_TYPE = {
 export const TOKENS = [
   {
     "type": "xtz",
-    "tokenType": "XTZ",
+    "tokenType": TOKEN_TYPE.XTZ,
     "id": "XTZ",
     "decimals": 6,
     "symbol": "XTZ",
@@ -19,7 +19,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV",
     "decimals": 18,
     "symbol": "KUSD",
@@ -29,7 +29,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT193D4vozYnhGJQVtw7CoxxqphqUEEwK6Vb",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -40,7 +40,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1VYsVfmobT7rsMVivvZ4J8i3bPiqz12NaH",
     "decimals": 6,
     "symbol": "wXTZ",
@@ -50,7 +50,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1REEb5VxWRjcHm5GzDMwErMmNFftsE5Gpf",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -61,7 +61,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1PWx2mnDueood7fEmfbBDKx1D9BAnnXitn",
     "decimals": 8,
     "symbol": "tzBTC",
@@ -71,7 +71,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1AEfeckNbdEYwaMKkytBwPJPycz7jdSGea",
     "decimals": 18,
     "symbol": "STKR",
@@ -81,7 +81,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9",
     "decimals": 6,
     "symbol": "USDtz",
@@ -91,7 +91,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT19at7rQUvyjxnZ2fBv7D9zc8rkyG7gAoU8",
     "decimals": 18,
     "symbol": "ETHtz",
@@ -101,7 +101,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1AFA2mwNUMNd4SsujE1YYp29vd8BZejyKW",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -112,7 +112,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd",
     "fa2TokenId": 0,
     "decimals": 8,
@@ -123,7 +123,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1BHCumksALJQJ8q8to2EPigPW6qpyTr7Ng",
     "fa2TokenId": 0,
     "decimals": 8,
@@ -134,7 +134,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 0,
     "decimals": 18,
@@ -145,7 +145,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 1,
     "decimals": 18,
@@ -156,7 +156,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 2,
     "decimals": 4,
@@ -167,7 +167,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 3,
     "decimals": 18,
@@ -178,7 +178,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 4,
     "decimals": 8,
@@ -189,7 +189,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 5,
     "decimals": 18,
@@ -200,7 +200,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 6,
     "decimals": 18,
@@ -211,7 +211,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 7,
     "decimals": 18,
@@ -222,7 +222,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 8,
     "decimals": 8,
@@ -233,7 +233,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 9,
     "decimals": 18,
@@ -244,7 +244,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 10,
     "decimals": 18,
@@ -255,7 +255,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 11,
     "decimals": 18,
@@ -266,7 +266,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 12,
     "decimals": 18,
@@ -277,7 +277,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 13,
     "decimals": 18,
@@ -288,7 +288,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 14,
     "decimals": 18,
@@ -299,7 +299,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 15,
     "decimals": 18,
@@ -310,7 +310,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 16,
     "decimals": 18,
@@ -321,7 +321,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 17,
     "decimals": 6,
@@ -332,7 +332,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 18,
     "decimals": 6,
@@ -343,7 +343,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 19,
     "decimals": 8,
@@ -354,7 +354,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT18fp5rcTW7mbWDmzFwjLDUhs5MeJmagDSZ",
     "fa2TokenId": 20,
     "decimals": 18,
@@ -365,7 +365,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1GRSvLoikDsXujKgZPsGLX8k8VvR2Tq95b",
     "decimals": 18,
     "symbol": "PLENTY",
@@ -375,7 +375,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1A5P4ejnLix13jtadsfV9GCnXLMNnab8UT",
     "fa2TokenId": 0,
     "decimals": 10,
@@ -386,7 +386,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1XPFjZqCULSnqfKaaYy8hJjeY63UNSGwXg",
     "fa2TokenId": 0,
     "decimals": 8,
@@ -397,7 +397,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1TwzD6zV3WeJ39ukuqxcfK2fJCnhvrdN1X",
     "decimals": 3,
     "symbol": "SMAK",
@@ -407,7 +407,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1JkoE42rrMBP9b2oDhbx6EUr26GcySZMUH",
     "decimals": 18,
     "symbol": "kDAO",
@@ -417,7 +417,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW",
     "fa2TokenId": 0,
     "decimals": 12,
@@ -428,7 +428,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW",
     "fa2TokenId": 1,
     "decimals": 12,
@@ -439,7 +439,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW",
     "fa2TokenId": 2,
     "decimals": 12,
@@ -450,7 +450,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1GUNKmkrgtMQjJp3XxcmCj6HZBhkUmMbge",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -461,7 +461,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1Xobej4mc6XgEjDoJoHtTKgbD1ELMvcQuL",
     "fa2TokenId": 0,
     "decimals": 12,
@@ -472,7 +472,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT19JYndHaesXpvUfiwgg8BtE41HKkjjGMRC",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -483,7 +483,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1MuyJ7gVw74FNJpfb2mHR15aCREdyEbe2e",
     "fa2TokenId": 0,
     "decimals": 8,
@@ -494,7 +494,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1ErKVqEhG9jxXgUG2KGLW3bNM7zXHX8SDF",
     "fa2TokenId": 0,
     "decimals": 9,
@@ -505,7 +505,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1XTxpQvo7oRCqp85LikEZgAZ22uDxhbWJv",
     "fa2TokenId": 0,
     "decimals": 9,
@@ -516,7 +516,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1WapdVeFqhCfqwdHWwTzSTX7yXoHgiPRPU",
     "fa2TokenId": 0,
     "decimals": 8,
@@ -527,7 +527,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1QgAtLPu3SNq9c6DPLanwL5bvfX3rgh2CS",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -538,7 +538,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT19y6R8x53uDKiM46ahgguS6Tjqhdj2rSzZ",
     "fa2TokenId": 0,
     "decimals": 9,
@@ -549,7 +549,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1Rpviewjg82JgjGfAKFneSupjAR1kUhbza",
     "decimals": 18,
     "symbol": "xPLENTY",
@@ -559,7 +559,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT1SjXiUX63QvdNMcM2m492f7kuf8JxXRLp4",
     "decimals": 6,
     "symbol": "ctez",
@@ -569,7 +569,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA1.2",
+    "tokenType": TOKEN_TYPE.FA12,
     "id": "KT19DUSZw7mfeEATrbWVPHRrWNVbNnmfFAE6",
     "decimals": 8,
     "symbol": "PAUL",
@@ -579,7 +579,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1CS2xKGHNPTauSh5Re4qE3N9PCfG5u4dPx",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -590,7 +590,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1PnUZCp3u2KzWr93pn4DD7HAJnm3rWVrgn",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -601,7 +601,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1Wa8yqRBpFCusJWgcQyjhRz7hUQAmFxW7j",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -612,7 +612,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1KPoyzkj82Sbnafm6pfesZKEhyCpXwQfMc",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -623,7 +623,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1F1mn2jbqQCJcsNgYKVAQjvenecNMY2oPK",
     "fa2TokenId": 0,
     "decimals": 6,
@@ -634,7 +634,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT19ovJhcsUn4YU8Q5L3BGovKSixfbWcecEA",
     "fa2TokenId": 1,
     "decimals": 0,
@@ -645,7 +645,7 @@ export const TOKENS = [
   },
   {
     "type": "token",
-    "tokenType": "FA2",
+    "tokenType": TOKEN_TYPE.FA2,
     "id": "KT1KRvNVubq64ttPbQarxec5XdS6ZQU4DVD2",
     "fa2TokenId": 0,
     "decimals": 6,
