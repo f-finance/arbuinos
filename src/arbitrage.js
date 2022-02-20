@@ -2,20 +2,24 @@ import {
   estimateBestAmountIn,
   estimateProfit
 } from "./estimates.js";
-import { stateToPoolsExtractors } from "./extractors.js";
+import { contractStorageToPoolsExtractors } from "./extractors.js";
+import { ENV } from "../example/env.js";
 
 import BigNumber from "bignumber.js";
 
-export const findArbitrage = async ({ dexState }) => {
+export const findArbitrage = async ({ contractStorage, contractAddressToDex }) => {
   console.log("Start findArbitrage");
 
-  const regularPools = (
-    await Promise.all(
-      Object.keys(dexState).map((key) => {
-        return stateToPoolsExtractors[key](dexState[key]);
-      })
-    )
-  ).flat();
+  const regularPools = [];
+  for (const [address, storage] of contractStorage.entries()) {
+    const dex = contractAddressToDex.get(address);
+    if (ENV.USED_DEX.includes(dex)) {
+      const poolsExtractor = contractStorageToPoolsExtractors[dex];
+      const new_pools = await poolsExtractor(storage);
+
+      regularPools.push(...new_pools.map((pool) => ({ dex, contractAddress: address, ...pool })));
+    }
+  }
   const invertedPools = regularPools.map((pool) => ({
     ...pool,
     address1: pool.address2,
