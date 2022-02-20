@@ -1,7 +1,7 @@
 import {
-  getBestAmountIn,
-  calculateProfit,
-} from "./calculations.js";
+  estimateBestAmountIn,
+  estimateProfit
+} from "./estimates.js";
 import { stateToPoolsExtractors } from "./pools/extract.js";
 
 import BigNumber from "bignumber.js";
@@ -21,7 +21,7 @@ export const findArbitrage = async ({ dexState }) => {
     address1: pool.address2,
     address2: pool.address1,
     liquidity1: pool.liquidity2,
-    liquidity2: pool.liquidity1,
+    liquidity2: pool.liquidity1
   }));
   const pools = [...regularPools, ...invertedPools];
 
@@ -35,16 +35,16 @@ export const findArbitrage = async ({ dexState }) => {
     if (
       path.length > 1 &&
       JSON.stringify(path[path.length - 1].address2) ===
-        JSON.stringify(path[0].address1)
+      JSON.stringify(path[0].address1)
     ) {
       checkedPath += 1;
-      const bestAmountIn = getBestAmountIn(path);
-      const profit = calculateProfit(path, bestAmountIn);
+      const bestAmountIn = estimateBestAmountIn(path);
+      const profit = estimateProfit(path, bestAmountIn);
       if (profit.gt(new BigNumber("0"))) {
         const add = {
           path: path,
           bestAmountIn: bestAmountIn,
-          profit: profit,
+          profit: profit
         };
         profitableArbitrageCycles.push(add);
       }

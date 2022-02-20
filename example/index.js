@@ -6,12 +6,13 @@ import { initDexFunctionsNew } from "../src/storage.js";
 import { findArbitrage } from "../src/arbitrage.js";
 import { watch } from "./watch.js";
 import logger from "../src/logger.js";
-import { executeArbitrage } from "../src/execute.js";
+import { arbitrageToOperationBatch } from "../src/operations.js";
 
 const tryExecuteArbitrages = async (state, arbitrages) => {
   for (let i = 0; i < arbitrages.length; i += 1) {
     try {
-      await executeArbitrage(state, arbitrages[i]);
+      const batch = await arbitrageToOperationBatch(state, arbitrages[i])
+      await batch.send();
     } catch (e) {
       console.log(`Failed ${i}`, e);
       continue;
