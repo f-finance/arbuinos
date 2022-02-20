@@ -19,13 +19,6 @@ export const estimateAmountOut = (
     .div(a.plus(r1.multipliedBy(delta_a))).integerValue(BigNumber.ROUND_DOWN);
 };
 
-export const getMinAmountOut = (amount, slippage) => {
-  const a = new BigNumber(amount);
-  const s = new BigNumber(slippage);
-
-  return a.minus(a.multipliedBy(s));
-};
-
 export const estimateProfit = (path, initial = new BigNumber("1")) => {
   let amount = initial;
   let overflow = false;

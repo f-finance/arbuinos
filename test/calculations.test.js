@@ -1,6 +1,5 @@
 import {
   estimateAmountOut,
-  getMinAmountOut,
   estimateBestAmountIn,
 } from "../src/estimates.js";
 import BigNumber from "bignumber.js";
@@ -15,15 +14,6 @@ test.concurrent.each([
 ])("getAmountOut", async (args, expected) => {
   expect(estimateAmountOut(...args).toNumber()).toBeCloseTo(expected.toNumber());
 });
-
-test.concurrent.each([[[0.19969572, 0.005], new BigNumber("0.1986972414")]])(
-  "getMinAmountOut",
-  async (args, expected) => {
-    expect(getMinAmountOut(...args).toNumber()).toBeCloseTo(
-      expected.toNumber()
-    );
-  }
-);
 
 test.concurrent.each([
   [
