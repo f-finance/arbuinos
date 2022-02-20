@@ -4,7 +4,7 @@ import { InMemorySigner } from "@taquito/signer";
 import { ENV } from "./env.js";
 import { initDexFunctionsNew } from "../src/storage.js";
 import { findArbitrage } from "../src/arbitrage.js";
-import { watch } from "./watch.js";
+import { watch } from "../src/watch.js";
 import logger from "../src/logger.js";
 import { arbitrageToOperationBatch } from "../src/operations.js";
 

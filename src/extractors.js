@@ -1,6 +1,6 @@
-import { DEX } from "../config/dex.js";
-import { TOKEN_TYPE } from "../config/tokens.js";
-import { assetToSlug } from "../helpers.js";
+import { DEX } from "./config/dex.js";
+import { TOKEN_TYPE } from "./config/tokens.js";
+import { assetToSlug } from "./helpers.js";
 
 import BigNumber from "bignumber.js";
 
@@ -159,7 +159,7 @@ const spicyswapStateToPoolsInfo = async (storage) => {
   ];
 };
 
-const contractStorageToPoolsExtractors = {
+export const contractStorageToPoolsExtractors = {
   [DEX.QUIPUSWAP]: quipuswapStateToPoolsInfo,
   [DEX.PLENTY]: plentyStateToPoolsInfo,
   [DEX.VORTEX]: vortexStateToPoolsInfo,

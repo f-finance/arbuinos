@@ -1,7 +1,7 @@
 import signalR from "@microsoft/signalr";
 
-import logger from "../src/logger.js";
-import { DEX } from "../src/config/dex.js";
+import logger from "./logger.js";
+import { DEX } from "./config/dex.js";
 
 // TODO handle connection issues
 const connection = new signalR.HubConnectionBuilder()

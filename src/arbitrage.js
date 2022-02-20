@@ -2,7 +2,7 @@ import {
   estimateBestAmountIn,
   estimateProfit
 } from "./estimates.js";
-import { stateToPoolsExtractors } from "./pools/extract.js";
+import { stateToPoolsExtractors } from "./extractors.js";
 
 import BigNumber from "bignumber.js";
 
