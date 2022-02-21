@@ -31,14 +31,11 @@
     "regenerator-runtime": "^0.13.9"
   },
   "dependencies": {
-    "@dipdup/tzkt-events": "^0.0.1",
-    "@ledgerhq/hw-transport-node-hid": "^6.24.1",
-    "@ledgerhq/hw-transport-node-hid-singleton": "^6.24.1",
     "@microsoft/signalr": "^5.0.13",
+    "@taquito/michelson-encoder": "^11.2.0",
     "@quipuswap/sdk": "^2.3.0",
-    "@taquito/ledger-signer": "^11.2.0",
-    "@taquito/signer": "^11.2.0",
     "@taquito/taquito": "^11.2.0",
+    "@taquito/signer": "^11.2.0",
     "batch-request-js": "^2.0.2",
     "bignumber.js": "^9.0.1",
     "winston": "^3.6.0"
