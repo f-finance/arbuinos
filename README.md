@@ -20,3 +20,24 @@ We created arbuinos to promote **decentralized market-making**: enabling members
 | <img src="https://user-images.githubusercontent.com/14910910/154967619-013d780a-f3b5-40ef-9bce-486feea694f8.png" alt="Flame" width="90" /> | FLAME | [Flame DEX](https://app.flamedex.io/) | ![YELLOW](https://via.placeholder.com/15/ffff00/?text=+)
 | <img src="https://user-images.githubusercontent.com/14910910/154967940-64a5003d-bbd3-4640-8580-90a70fa16755.png" alt="Liquidi Baking DEX" width="30" /> | TZBTCORIGINAL | [tzBTC DEX](https://tzkt.io/KT1TxqZ8QtKvLu3V3JH7Gx58n7Co8pgtpQU5) | ![GREEN](https://via.placeholder.com/15/008000/?text=+)
 | <img src="https://user-images.githubusercontent.com/14910910/154968470-863ecb53-3938-43ed-895c-0100019b8158.png" alt="SpicySwap" width="90" /> | SPICYSWAP | [SpicySwap](https://spicyswap.xyz/#/app) | ![GREEN](https://via.placeholder.com/15/008000/?text=+)
+
+## Getting Started
+
+### Learn more about Arbuinos
+
+- [Website](https://arbuinos.8kb.dev/)
+- [Documentation](https://arbuinos.8kb.dev/docs/intro/)
+
+### Install Arbuinos
+
+- TODO
+
+## Contributions
+
+We welcome contributions from the community:
+- Code and documentation contributions via [pull requests](https://github.com/f-finance/arbuinos/pulls)
+- Bug reports and feature requests through [Github issues](https://github.com/f-finance/arbuinos/issues)
+
+## Legal
+
+- **License**: Arbuinos is licensed under [MIT](./LICENSE).
