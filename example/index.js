@@ -18,7 +18,7 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
       await batch.send();
     } catch (e) {
       console.log(`Failed ${i}`, e);
-      continue;
+      break;
     }
     break;
   }
@@ -63,8 +63,10 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
   await watch(state.contractStorage, ({ newContractStorage }) => {
     logger.profile("findArbitrage", { level: "debug" });
     extractPoolsFromState({ ...state, contractStorage: newContractStorage })
-      .then(findArbitrageV2)
-      .then(arbitrages => arbitrages.filter((item) => item.profit.gt(new BigNumber("20000"))))
+      .then(async pools => {
+        return [...await findArbitrageV2(pools), ...await findArbitrageV2(pools, new BigNumber("10").pow(6))];
+      })
+      .then(arbitrages => arbitrages.filter((item) => item.profit.gt(new BigNumber("50000"))))
       // .then(arbitrages => {
       //   console.log(JSON.stringify(arbitrages, null, ' '));
       //   return arbitrages;

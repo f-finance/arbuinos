@@ -119,7 +119,7 @@ export const findArbitrageV2 = async (pools, initialAmount = new BigNumber("10")
     //   }
     //   address2ToBestAmountOut[path[path.length - 1].address2] = new BigNumber(amountPath[amountPath.length - 1]);
     // }
-    if (depth < 5) {
+    if (depth < 4) {
       // max depth 3
       const from = path.length > 0 ? path[path.length - 1].address2 : "tez";
       address1ToPools[from]
