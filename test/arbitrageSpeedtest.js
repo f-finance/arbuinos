@@ -1,5 +1,5 @@
 import { poolsLog } from "./pools.log.js";
-import { findArbitrage } from "../src/arbitrage.js";
+import { findArbitrage, findArbitrageV2 } from "../src/arbitrage.js";
 
 import BigNumber from "bignumber.js";
 
@@ -14,7 +14,7 @@ import BigNumber from "bignumber.js";
 
   const start = new Date().getTime();
 
-  const arb = (await findArbitrage(pools));
+  const arb = (await findArbitrageV2(pools));
   console.log("found arbitrages", arb.length);
   console.log("arbitrage", JSON.stringify(arb[0], null, ' '));
 

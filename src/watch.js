@@ -6,6 +6,7 @@ import { DEX } from "./config/dex.js";
 // TODO handle connection issues
 const connection = new signalR.HubConnectionBuilder()
   .withUrl("https://api.tzkt.io/v1/events")
+  .withAutomaticReconnect()
   .build();
 
 (async () => {

@@ -3,7 +3,7 @@ import { InMemorySigner } from "@taquito/signer";
 
 import { ENV } from "./env.js";
 import { initStorageBuilder } from "../src/storage.js";
-import { findArbitrage } from "../src/arbitrage.js";
+import { findArbitrage, findArbitrageV2 } from "../src/arbitrage.js";
 import { watch } from "../src/watch.js";
 import logger from "../src/logger.js";
 import { arbitrageToOperationBatch } from "../src/operations.js";
@@ -63,8 +63,12 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
   await watch(state.contractStorage, ({ newContractStorage }) => {
     logger.profile("findArbitrage", { level: "debug" });
     extractPoolsFromState({ ...state, contractStorage: newContractStorage })
-      .then(findArbitrage)
+      .then(findArbitrageV2)
       .then(arbitrages => arbitrages.filter((item) => item.profit.gt(new BigNumber("20000"))))
+      // .then(arbitrages => {
+      //   console.log(JSON.stringify(arbitrages, null, ' '));
+      //   return arbitrages;
+      // })
       .then((arbitrages) => {
 
         tryExecuteArbitrages(state, arbitrages);
