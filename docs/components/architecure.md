@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Architecture
 
-**arbuinoz** contains from the several components that can be extended and modified to use for your own purposes
+**arbuinos** contains from the several components that can be extended and modified to use for your own purposes
 
 * [Indexer](./indexer.md)
 * [Calculations](./calculations.md)
