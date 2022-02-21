@@ -6,3 +6,6 @@ example/env.js
 
 Session.vim
 *.log
+
+build/
+.docusaurus/
