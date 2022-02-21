@@ -656,11 +656,11 @@ export const TOKENS = [
   }
 ];
 
-export const SLUG_TO_TOKEN = Object.fromEntries(TOKENS.map(token => [
-  assetToSlug({
-    type: token.type,
-    address: token.id,
-    ...(token.type === TOKEN_TYPE.FA2 ? { tokenId: token.fa2TokenId } : {})
-  }),
-  token
-]));
+// export const SLUG_TO_TOKEN = Object.fromEntries(TOKENS.map(token => [
+//   assetToSlug({
+//     type: token.type,
+//     address: token.id,
+//     ...(token.type === TOKEN_TYPE.FA2 ? { tokenId: token.fa2TokenId } : {})
+//   }),
+//   token
+// ]));

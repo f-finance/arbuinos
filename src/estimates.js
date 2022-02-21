@@ -19,27 +19,34 @@ export const estimateAmountOut = (
     .div(a.plus(r1.multipliedBy(delta_a))).integerValue(BigNumber.ROUND_DOWN);
 };
 
+export const estimatePoolAmountOut = (
+  amount,
+  pool
+) => {
+  const delta_a = new BigNumber(amount);
+
+  return pool.fee1.multipliedBy(pool.fee2).multipliedBy(pool.liquidity2).multipliedBy(delta_a)
+    .idiv(pool.liquidity1.plus(pool.fee1.multipliedBy(delta_a)));
+};
+
 export const estimateProfit = (path, initial = new BigNumber("1")) => {
   let amount = initial;
   let overflow = false;
-  path.forEach((pool) => {
+  for (let i = 0; i < path.length; i += 1) {
+    const pool = path[i];
     if (amount.gt(pool.liquidity1)) {
       overflow = true;
+      break;
     }
-    if (overflow) {
-      return;
-    }
-    amount = estimateAmountOut(
+    amount = estimatePoolAmountOut(
       amount,
-      pool.liquidity1,
-      pool.liquidity2,
-      pool.fee1,
-      pool.fee2
+      pool
     );
     if (amount.gt(pool.liquidity2)) {
       overflow = true;
+      break;
     }
-  });
+  }
   if (overflow) {
     return new BigNumber("-10000000000000000000"); // some very small number
   }
@@ -47,15 +54,11 @@ export const estimateProfit = (path, initial = new BigNumber("1")) => {
 };
 
 export const estimateBestAmountIn = (path) => {
-  let l = new BigNumber("1"),
-    r = path[0].liquidity1;
+  let l = new BigNumber("1"), r = path[0].liquidity1;
   while (r.minus(l).gt(new BigNumber("1000"))) {
-    const mid1 = l
-      .plus(r.minus(l).div(9).multipliedBy(4))
-      .integerValue(BigNumber.ROUND_DOWN);
-    const mid2 = l
-      .plus(r.minus(l).div(9).multipliedBy(5))
-      .integerValue(BigNumber.ROUND_DOWN);
+    const diff = r.minus(l).idiv(9);
+    const mid1 = l.plus(diff.multipliedBy(4));
+    const mid2 = mid1.plus(diff);
     const profit1 = estimateProfit(path, mid1);
     const profit2 = estimateProfit(path, mid2);
     if (profit1.gt(profit2) || profit2.lt(new BigNumber("0"))) {

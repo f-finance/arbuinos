@@ -8,6 +8,8 @@ import { watch } from "../src/watch.js";
 import logger from "../src/logger.js";
 import { arbitrageToOperationBatch } from "../src/operations.js";
 import { DEX } from "../src/config/dex.js";
+import { extractPoolsFromState } from "../src/extractors.js";
+import BigNumber from "bignumber.js";
 
 const tryExecuteArbitrages = async (state, arbitrages) => {
   for (let i = 0; i < arbitrages.length; i += 1) {
@@ -60,19 +62,22 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
 
   await watch(state.contractStorage, ({ newContractStorage }) => {
     logger.profile("findArbitrage", { level: "debug" });
-    findArbitrage({ ...state, contractStorage: newContractStorage }).then((arbitrages) => {
+    extractPoolsFromState({ ...state, contractStorage: newContractStorage })
+      .then(findArbitrage)
+      .then(arbitrages => arbitrages.filter((item) => item.profit.gt(new BigNumber("20000"))))
+      .then((arbitrages) => {
 
-      tryExecuteArbitrages(state, arbitrages);
+        tryExecuteArbitrages(state, arbitrages);
 
-      logger.profile("findArbitrage", { level: "debug" });
-      logger.debug("Existed arbitrages are:", {
-        arbitrages: arbitrages.map((item) => ({
-          path: item.path.map(({ dex, contractAddress, address1, address2 }) => ({
-            dex, contractAddress, address1, address2
-          })), bestAmountIn: item.bestAmountIn.toString(), profit: item.profit.toString()
-        }))
+        logger.profile("findArbitrage", { level: "debug" });
+        logger.debug("Existed arbitrages are:", {
+          arbitrages: arbitrages.map((item) => ({
+            path: item.path.map(({ dex, contractAddress, address1, address2 }) => ({
+              dex, contractAddress, address1, address2
+            })), bestAmountIn: item.bestAmountIn.toString(), profit: item.profit.toString()
+          }))
+        });
+        logger.info("Existed arbitrages calculation is done");
       });
-      logger.info("Existed arbitrages calculation is done");
-    });
   });
 })();

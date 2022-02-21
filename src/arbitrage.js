@@ -2,81 +2,68 @@ import {
   estimateBestAmountIn,
   estimateProfit
 } from "./estimates.js";
-import { contractStorageToPoolsExtractors } from "./extractors.js";
-import { ENV } from "../example/env.js";
 
 import BigNumber from "bignumber.js";
 
-export const findArbitrage = async ({ contractStorage, contractAddressToDex }) => {
+export const findArbitrage = async (pools) => {
   console.log("Start findArbitrage");
 
-  const regularPools = [];
-  for (const [address, storage] of contractStorage.entries()) {
-    const dex = contractAddressToDex.get(address);
-    if (ENV.USED_DEX.includes(dex)) {
-      const poolsExtractor = contractStorageToPoolsExtractors[dex];
-      const new_pools = await poolsExtractor(storage);
-
-      regularPools.push(...new_pools.map((pool) => ({ dex, contractAddress: address, ...pool })));
-    }
-  }
-  const invertedPools = regularPools.map((pool) => ({
-    ...pool,
-    address1: pool.address2,
-    address2: pool.address1,
-    liquidity1: pool.liquidity2,
-    liquidity2: pool.liquidity1
-  }));
-  const pools = [...regularPools, ...invertedPools];
-
   console.log(`Pools number: ${pools.length}`);
-  // console.log(JSON.stringify(pools, null, " "));
 
   const profitableArbitrageCycles = [];
   let checkedPath = 0;
 
-  const brute = (path, depth) => {
+  const address1ToPools = {};
+  pools.forEach(pool => {
+    if (!(pool.address1 in address1ToPools)) {
+      address1ToPools[pool.address1] = [];
+    }
+    address1ToPools[pool.address1].push(pool);
+  });
+
+  const path = [];
+  const used = new Map();
+
+  let cnt = 0;
+  const brute = (depth) => {
+    cnt += 1;
     if (
       path.length > 1 &&
-      JSON.stringify(path[path.length - 1].address2) ===
-      JSON.stringify(path[0].address1)
+      path[path.length - 1].address2 === path[0].address1
     ) {
       checkedPath += 1;
       const bestAmountIn = estimateBestAmountIn(path);
       const profit = estimateProfit(path, bestAmountIn);
       if (profit.gt(new BigNumber("0"))) {
         const add = {
-          path: path,
+          path: [...path],
           bestAmountIn: bestAmountIn,
           profit: profit
         };
         profitableArbitrageCycles.push(add);
       }
     }
-    if (depth < 4) {
+    if (depth < 3) {
       // max depth 3
-      pools
-        .filter((pool) => {
-          if (path.length === 0) return pool.address1 === "tez";
-          if (pool.address1 !== path[path.length - 1].address2) return false;
-          for (const item of path) {
-            if (item.address1 === pool.address1) {
-              return false;
-            }
-          }
-          return true;
-        })
+      const from = path.length > 0 ? path[path.length - 1].address2 : "tez";
+      address1ToPools[from]
+        .filter((pool) => (used.get(pool.address1) !== 1))
         .forEach((pool) => {
-          brute([...path, pool], depth + 1);
+          path.push(pool);
+          used.set(pool.address1, 1);
+          brute(depth + 1);
+          used.set(pool.address1, 0);
+          path.pop();
         });
     }
   };
+  console.log(cnt);
 
-  brute([], 0);
+  brute(0);
 
   console.log(`Checked ${checkedPath} arbitrage paths`);
 
   return profitableArbitrageCycles
-    .sort((a, b) => b.profit.minus(a.profit).toNumber())
-    .filter((item) => item.profit.gt(new BigNumber("20000")));
+    .sort((a, b) => b.profit.minus(a.profit).toNumber());
 };
+
