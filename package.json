@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon index.js",
-    "run": "node index.js"
+    "run": "node index.js",
+    "build": "npx tsc"
   },
   "author": "",
   "license": "MIT",

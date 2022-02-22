@@ -12,8 +12,8 @@ export const initStorageBuilder = (contract_list) => {
       contract_list,
       contractStorageRequest(tezos),
       {
-        batchSize: 10, // TODO move to config
-        delay: 1000, // TODO move to config
+        batchSize: 20, // TODO move to config
+        delay: 10, // TODO move to config
       }
     );
     if (error.length > 0) {
@@ -22,4 +22,3 @@ export const initStorageBuilder = (contract_list) => {
     return new Map(data);
   };
 };
-
