@@ -1,6 +1,6 @@
 {
   "name": "arbuinos",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "SDK for creating an arbitrage bots for Tezos",
   "main": "dist/index.js",
   "files": [
