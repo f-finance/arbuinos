@@ -3,6 +3,9 @@
   "version": "0.1.1",
   "description": "SDK for creating an arbitrage bots for Tezos",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "scripts": {
     "test": "jest",
