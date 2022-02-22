@@ -1,5 +1,3 @@
-import { DEX } from "./config/dex.js";
-import { ENV } from "../example/env.js";
 import batchRequest from "batch-request-js";
 
 const contractStorageRequest = (tezos) => (contract) =>
@@ -10,13 +8,18 @@ const contractStorageRequest = (tezos) => (contract) =>
 
 export const initStorageBuilder = (contract_list) => {
   return async (tezos) => {
-    const { data, error } = await batchRequest(contract_list, contractStorageRequest(tezos), {
-      batchSize: 10,
-      delay: 1000
-    });
+    const { data, error } = await batchRequest(
+      contract_list,
+      contractStorageRequest(tezos),
+      {
+        batchSize: 10, // TODO move to config
+        delay: 1000, // TODO move to config
+      }
+    );
     if (error.length > 0) {
       console.log("There are problems in initStorage");
     }
     return new Map(data);
   };
 };
+

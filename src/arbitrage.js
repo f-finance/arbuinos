@@ -1,7 +1,7 @@
 import {
-  estimateAmountOut,
-  estimateBestAmountIn, estimatePoolAmountOut,
-  estimateProfit
+  estimateBestAmountIn,
+  estimatePoolAmountOut,
+  estimateProfit,
 } from "./estimates.js";
 
 import BigNumber from "bignumber.js";
@@ -15,7 +15,7 @@ export const findArbitrage = async (pools) => {
   let checkedPath = 0;
 
   const address1ToPools = {};
-  pools.forEach(pool => {
+  pools.forEach((pool) => {
     if (!(pool.address1 in address1ToPools)) {
       address1ToPools[pool.address1] = [];
     }
@@ -39,7 +39,7 @@ export const findArbitrage = async (pools) => {
         const add = {
           path: [...path],
           bestAmountIn: bestAmountIn,
-          profit: profit
+          profit: profit,
         };
         profitableArbitrageCycles.push(add);
       }
@@ -48,7 +48,7 @@ export const findArbitrage = async (pools) => {
       // max depth 3
       const from = path.length > 0 ? path[path.length - 1].address2 : "tez";
       address1ToPools[from]
-        .filter((pool) => (used.get(pool.address1) !== 1))
+        .filter((pool) => used.get(pool.address1) !== 1)
         .forEach((pool) => {
           path.push(pool);
           used.set(pool.address1, 1);
@@ -64,11 +64,15 @@ export const findArbitrage = async (pools) => {
 
   console.log(`Checked ${checkedPath} arbitrage paths`);
 
-  return profitableArbitrageCycles
-    .sort((a, b) => b.profit.minus(a.profit).toNumber());
+  return profitableArbitrageCycles.sort((a, b) =>
+    b.profit.minus(a.profit).toNumber()
+  );
 };
 
-export const findArbitrageV2 = async (pools, initialAmount = new BigNumber("10").pow(5)) => {
+export const findArbitrageV2 = async (
+  pools,
+  initialAmount = new BigNumber("10").pow(5)
+) => {
   console.log("Start findArbitrageV2");
 
   console.log(`Pools number: ${pools.length}`);
@@ -80,7 +84,7 @@ export const findArbitrageV2 = async (pools, initialAmount = new BigNumber("10")
 
   const address1ToPools = {};
   // const address2ToBestAmountOut = {};
-  pools.forEach(pool => {
+  pools.forEach((pool) => {
     if (!(pool.address1 in address1ToPools)) {
       address1ToPools[pool.address1] = [];
     }
@@ -108,7 +112,7 @@ export const findArbitrageV2 = async (pools, initialAmount = new BigNumber("10")
         const add = {
           path: [...path],
           bestAmountIn: bestAmountIn,
-          profit: profit
+          profit: profit,
         };
         profitableArbitrageCycles.push(add);
       }
@@ -123,12 +127,15 @@ export const findArbitrageV2 = async (pools, initialAmount = new BigNumber("10")
       // max depth 3
       const from = path.length > 0 ? path[path.length - 1].address2 : "tez";
       address1ToPools[from]
-        .filter((pool) => (used.get(pool.address1) !== 1))
+        .filter((pool) => used.get(pool.address1) !== 1)
         .forEach((pool) => {
           if (amountPath[amountPath.length - 1].gt(pool.liquidity1)) {
             return;
           }
-          const amountOut = estimatePoolAmountOut(amountPath[amountPath.length - 1], pool);
+          const amountOut = estimatePoolAmountOut(
+            amountPath[amountPath.length - 1],
+            pool
+          );
           if (amountOut.gt(pool.liquidity2)) {
             return;
           }
@@ -146,28 +153,28 @@ export const findArbitrageV2 = async (pools, initialAmount = new BigNumber("10")
 
   brute(0);
 
-  profitableArbitrageCycles
-    .sort((a, b) => b.profit.minus(a.profit).toNumber());
+  profitableArbitrageCycles.sort((a, b) => b.profit.minus(a.profit).toNumber());
   if (profitableArbitrageCycles.length > 100) {
     profitableArbitrageCycles = profitableArbitrageCycles.slice(0, 100);
   }
 
-  profitableArbitrageCycles = profitableArbitrageCycles.map(pool => {
+  profitableArbitrageCycles = profitableArbitrageCycles.map((pool) => {
     const bestAmountIn = estimateBestAmountIn(pool.path);
     const profit = estimateProfit(pool.path, bestAmountIn);
     return {
       ...pool,
       bestAmountIn: bestAmountIn,
-      profit: profit
-    }
-  })
+      profit: profit,
+    };
+  });
 
   const end = new Date().getTime();
   const time = end - start;
-  console.log(`Checked ${checkedPath} arbitrage paths in ${time / 1000} seconds`);
+  console.log(
+    `Checked ${checkedPath} arbitrage paths in ${time / 1000} seconds`
+  );
 
-  return profitableArbitrageCycles
-    .sort((a, b) => b.profit.minus(a.profit).toNumber());
+  return profitableArbitrageCycles.sort((a, b) =>
+    b.profit.minus(a.profit).toNumber()
+  );
 };
-
-
