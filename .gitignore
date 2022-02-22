@@ -9,3 +9,5 @@ Session.vim
 
 build/
 .docusaurus/
+
+dist/

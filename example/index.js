@@ -39,7 +39,7 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
 
   const state = {
     tezos,
-    contractStorage: {}
+    contractStorage: {},
   };
   state.dexToContractAddresses = new Map([
     [DEX.QUIPUSWAP, ENV.QUIPUSWAP_CONTRACT_ADDRESSES],
@@ -47,41 +47,53 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
     [DEX.VORTEX, ENV.VORTEX_CONTRACT_ADDRESSES],
     [DEX.FLAME, ENV.FLAME_CONTRACT_ADDRESSES],
     [DEX.TZBTCORIGINAL, ENV.TZBTCORIGINAL_CONTRACT_ADDRESSES],
-    [DEX.SPICYSWAP, ENV.SPICYSWAP_CONTRACT_ADDRESSES]
+    [DEX.SPICYSWAP, ENV.SPICYSWAP_CONTRACT_ADDRESSES],
   ]);
   state.contractAddressToDex = new Map(
-    Array.from(state.dexToContractAddresses)
-      .flatMap(([dex, addresses]) => {
-        return addresses.map(address => ([address, dex]));
-      })
+    Array.from(state.dexToContractAddresses).flatMap(([dex, addresses]) => {
+      return addresses.map((address) => [address, dex]);
+    })
   );
 
   logger.profile("findArbitrage newest", { level: "debug" }); // 4988 ms
-  state.contractStorage = await initStorageBuilder(Array.from(state.contractAddressToDex.keys()))(state.tezos);
+  state.contractStorage = await initStorageBuilder(
+    Array.from(state.contractAddressToDex.keys())
+  )(state.tezos);
   logger.profile("findArbitrage newest");
 
   await watch(state.contractStorage, ({ newContractStorage }) => {
     logger.profile("findArbitrage", { level: "debug" });
     extractPoolsFromState({ ...state, contractStorage: newContractStorage })
-      .then(async pools => {
-        return [...await findArbitrageV2(pools), ...await findArbitrageV2(pools, new BigNumber("10").pow(6))];
+      .then(async (pools) => {
+        return [
+          ...(await findArbitrageV2(pools)),
+          ...(await findArbitrageV2(pools, new BigNumber("10").pow(6))),
+        ];
       })
-      .then(arbitrages => arbitrages.filter((item) => item.profit.gt(new BigNumber("50000"))))
+      .then((arbitrages) =>
+        arbitrages.filter((item) => item.profit.gt(new BigNumber("50000")))
+      )
       // .then(arbitrages => {
       //   console.log(JSON.stringify(arbitrages, null, ' '));
       //   return arbitrages;
       // })
       .then((arbitrages) => {
-
         tryExecuteArbitrages(state, arbitrages);
 
         logger.profile("findArbitrage", { level: "debug" });
         logger.debug("Existed arbitrages are:", {
           arbitrages: arbitrages.map((item) => ({
-            path: item.path.map(({ dex, contractAddress, address1, address2 }) => ({
-              dex, contractAddress, address1, address2
-            })), bestAmountIn: item.bestAmountIn.toString(), profit: item.profit.toString()
-          }))
+            path: item.path.map(
+              ({ dex, contractAddress, address1, address2 }) => ({
+                dex,
+                contractAddress,
+                address1,
+                address2,
+              })
+            ),
+            bestAmountIn: item.bestAmountIn.toString(),
+            profit: item.profit.toString(),
+          })),
         });
         logger.info("Existed arbitrages calculation is done");
       });
