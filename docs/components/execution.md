@@ -4,17 +4,18 @@ sidebar_position: 4
 
 # Execution
 
-As arbitrage contains from different operations on the contract. In very basic scenario at last two - buy some asset on one DEX and sell it on the other. There is an options to create combine this operations into one  [batch](https://tezostaquito.io/docs/batch_API) operation that can be executed as one transaction.
+We already learnt how to find profitable arbitrages. Now we need to execute then to get profit.
+
+**Arbuinos** provides simple method to make one [batch](https://tezostaquito.io/docs/batch_API) operation that can be sent to blockchain as one transaction.
 
 
 # How it works in SDK?
 
-For creating the batch transaction from arbitrages __arbuinos__ provides an __arbitrageToOperationBatch__ methods that takes existed arbitrages and forms the batch object that returns the taquito batch API.
+To create a batch transaction from arbitrage call __arbuinos__ method __arbitrageToOperationBatch__ that takes **arbuinos** state and arbitrage object and creates batch operation (same as you can create using taquito batch API).
 
 ```javascript
 import { arbitrageToOperationBatch } from "arbuinos";
 
-const batch = await arbitrageToOperationBatch(state, arbitrages);
-batch.send();
-
+const batch = await arbitrageToOperationBatch(state, arbitrage);
+await batch.send(); // send batch operation to blockchain
 ```
