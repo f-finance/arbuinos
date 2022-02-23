@@ -52,6 +52,11 @@ const config = {
             label: "Quick Start",
           },
           {
+            href: "https://typedoc-arbuinos.8kb.dev",
+            label: "Typedocs",
+            position: "left",
+          },
+          {
             href: `https://github.com/f-finance/${projectName}`,
             label: "GitHub",
             position: "right",
