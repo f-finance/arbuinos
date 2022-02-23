@@ -1,6 +1,7 @@
 import { DEX } from "./config/dex.js";
 import { TOKEN_TYPE } from "./config/tokens.js";
 import { assetToSlug } from "./helpers.js";
+import { findArbitrageV2 } from "./arbitrage.js";
 
 import BigNumber from "bignumber.js";
 
@@ -168,6 +169,24 @@ export const contractStorageToPoolsExtractors = {
   [DEX.SPICYSWAP]: spicyswapStateToPoolsInfo,
 };
 
+export const extractArbitrageFromState = async ({
+  contractStorage,
+  contractAddressToDex,
+  initialAmount,
+}) => {
+  const pools = await extractPoolsFromState({
+    contractStorage,
+    contractAddressToDex,
+  });
+
+  const arbitrages = await findArbitrageV2(pools);
+  const arbitragesWithInitailAmount = await findArbitrageV2(
+    pools,
+    initialAmount
+  );
+  return [...arbitrages, ...arbitragesWithInitailAmount];
+};
+
 export const extractPoolsFromState = async ({
   contractStorage,
   contractAddressToDex,
@@ -176,7 +195,13 @@ export const extractPoolsFromState = async ({
   for (const [address, storage] of contractStorage.entries()) {
     const dex = contractAddressToDex.get(address);
     const poolsExtractor = contractStorageToPoolsExtractors[dex];
-    const new_pools = await poolsExtractor(storage);
+    let new_pools;
+    try {
+      new_pools = await poolsExtractor(storage);
+    } catch (err) {
+      logger.err("Error durring extraction pool from the store", err);
+      throw new Error(err);
+    }
 
     regularPools.push(
       ...new_pools.map((pool) => ({ dex, contractAddress: address, ...pool }))

@@ -1,12 +1,10 @@
-import { MichelCodecPacker, TezosToolkit } from "@taquito/taquito";
+import { TezosToolkit } from "@taquito/taquito";
 import { InMemorySigner } from "@taquito/signer";
-import BigNumber from "bignumber.js";
 
 import { ENV, CONTRACTS } from "./env.mjs";
 import {
   initStorageBuilder,
-  extractPoolsFromState,
-  findArbitrageV2,
+  extractArbitrageFromState,
   arbitrageToOperationBatch,
   watch,
 } from "arbuinos";
@@ -14,8 +12,10 @@ import {
 const tryExecuteArbitrages = async (state, arbitrages) => {
   for (let i = 0; i < arbitrages.length; i += 1) {
     try {
+      console.log("Executring eisted arbitrages");
       const batch = await arbitrageToOperationBatch(state, arbitrages[i]);
       await batch.send();
+      console.log("Arbitrage transactinon has sent to blockchain");
     } catch (e) {
       console.log(`Failed ${i}`, e);
       break;
@@ -28,15 +28,10 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
   console.log("Bot is started...");
 
   const tezos = new TezosToolkit(ENV.TEZOS_RPC_HOST);
-  tezos.setPackerProvider(new MichelCodecPacker());
 
-  try {
-    const signer = await InMemorySigner.fromSecretKey(ENV.PRIVATE_KEY);
-    tezos.setProvider({ signer });
-    console.log("Key has succesfully signed");
-  } catch (err) {
-    console.error("Signing issues. Please check your key!", err);
-  }
+  const signer = await InMemorySigner.fromSecretKey(ENV.PRIVATE_KEY);
+
+  tezos.setProvider({ signer });
 
   const state = {
     tezos,
@@ -50,45 +45,29 @@ const tryExecuteArbitrages = async (state, arbitrages) => {
     )
   );
 
-  try {
-    console.log("Start storage calculation");
-    state.contractStorage = await initStorageBuilder(
-      Array.from(state.contractAddressToDex.keys())
-    )(state.tezos);
-  } catch (err) {
-    console.error("Error in store calculation", err);
-  }
+  state.contractStorage = await initStorageBuilder(
+    Object.values(CONTRACTS).flat()
+  )(state.tezos);
 
   await watch(state.contractStorage, ({ newContractStorage }) => {
-    extractPoolsFromState({ ...state, contractStorage: newContractStorage })
-      .then(async (pools) => {
-        console.log("Find pools");
-        return [
-          ...(await findArbitrageV2(pools)),
-          ...(await findArbitrageV2(pools, new BigNumber("10").pow(6))),
-        ];
-      })
-      .then((arbitrages) =>
-        arbitrages.filter((item) => item.profit.gt(new BigNumber("50000")))
-      )
-      .then((arbitrages) => {
-        // tryExecuteArbitrages(state, arbitrages);
+    const arbitrages = extractArbitrageFromState({
+      ...state,
+      contractStorage: newContractStorage,
+    });
 
-        console.log("Existed arbitrages are:", {
-          arbitrages: arbitrages.map((item) => ({
-            path: item.path.map(
-              ({ dex, contractAddress, address1, address2 }) => ({
-                dex,
-                contractAddress,
-                address1,
-                address2,
-              })
-            ),
-            bestAmountIn: item.bestAmountIn.toString(),
-            profit: item.profit.toString(),
-          })),
-        });
-        /* logger.info("Existed arbitrages calculation is done"); */
-      });
+    tryExecuteArbitrages(state, arbitrages);
+
+    console.log("Existed arbitrages are:", {
+      arbitrages: arbitrages.map((item) => ({
+        path: item.path.map(({ dex, contractAddress, address1, address2 }) => ({
+          dex,
+          contractAddress,
+          address1,
+          address2,
+        })),
+        bestAmountIn: item.bestAmountIn.toString(),
+        profit: item.profit.toString(),
+      })),
+    });
   });
 })();

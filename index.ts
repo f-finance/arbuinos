@@ -1,5 +1,5 @@
 export { findArbitrage, findArbitrageV2 } from "./src/arbitrage.js";
-export { extractPoolsFromState } from "./src/extractors.js";
+export { extractArbitrageFromState } from "./src/extractors.js";
 export { DEX } from "./src/config/dex.js";
 export { arbitrageToOperationBatch } from "./src/operations.js";
 export { initStorageBuilder } from "./src/storage.js";

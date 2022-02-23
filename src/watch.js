@@ -8,6 +8,12 @@ const connection = new signalR.HubConnectionBuilder()
   .withAutomaticReconnect()
   .build();
 
+/**
+ * @async
+ * @function
+ * @param {Map<String, Object>} contractStorage - Contract storage to watch
+ * @param {StoreChange} onStoreChange - Callback invokend on any changes to stores
+ */
 export const watch = async (contractStorage, onStoreChange) => {
   await connection.start();
   for (let address of contractStorage.keys()) {
